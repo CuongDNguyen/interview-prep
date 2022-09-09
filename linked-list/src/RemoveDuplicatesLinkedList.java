@@ -1,11 +1,12 @@
-package src;
+import java.util.HashMap;
+import java.util.HashSet;
 
 //remove duplicates from an unsorted linked list
 /*
 Example: 1 -> 5 -> 3 -> 7 -> 3 -> 2 -> 6 -> 2
 
 Brute Force:
-Hashmap for each val in list
+HashSet for each val in list
 iterate through array to remove the nodes with the entries and repoint their .next to the next of deleted
  */
 class RemoveDuplicatesLinkedList {
@@ -18,26 +19,34 @@ class RemoveDuplicatesLinkedList {
                 example.next.next.next.next.next = new Node(2);
                 example.next.next.next.next.next.next = new Node(6);
                 example.next.next.next.next.next.next.next = new Node(2);
-                myAttempt(example);
+
+       example.myAttempt(example);
+       while (example != null) {
+           System.out.println(example.val);
+           example = example.next;
+       }
     }
 
-    static void makeHashMap(Node hash) {
-
-    }
-    static void myAttempt(Node inputNode) {
-        Node currentNode = inputNode;
-        while (currentNode != null) {
-            System.out.println(currentNode.val);
-            currentNode = currentNode.next;
-        }
-    }
 }
 
 class Node {
     int val;
     Node next;
+    HashSet<Integer> duplicateCheckSet;
     Node (int val) {
         this.val = val;
         this.next = null;
+        this.duplicateCheckSet = new HashSet<>();
+    }
+
+    void myAttempt(Node inputNode) {
+        Node currentNode = inputNode;
+        while (currentNode.next != null) {
+            if (!this.duplicateCheckSet.add(currentNode.next.val)) {
+                currentNode.next = currentNode.next.next;
+            } else {
+                currentNode = currentNode.next;
+            }
+        }
     }
 }
