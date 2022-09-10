@@ -24,7 +24,7 @@ public class NthNodeFromTail {
         test.next = new Node(2);
         test.next.next = new Node(3);
         test.next.next.next = new Node(4);
-        System.out.println(myAttempt(test, 3));
+        System.out.println(myAttempt(test, 1));
     }
 
     static int myAttempt(Node inputNode, int n) {
