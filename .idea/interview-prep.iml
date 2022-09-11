@@ -3,7 +3,13 @@
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/binary-search/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/dynamic-programming/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/linked-list" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/pointers/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sorting/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/strings/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/trees/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
