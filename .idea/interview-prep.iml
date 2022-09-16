@@ -11,6 +11,7 @@
       <sourceFolder url="file://$MODULE_DIR$/strings/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/trees/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/backtracking/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/graphs/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/practice/src" isTestSource="false" />
     </content>
     <orderEntry type="inheritedJdk" />
