@@ -41,18 +41,18 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-LongestSubstring</artifactId>
+            <scope>LongestSubstring</scope>
         </dependency>
         <dependency>
             <groupId>de.flapdoodle.embed</groupId>
             <artifactId>de.flapdoodle.embed.mongo</artifactId>
-            <scope>test</scope>
+            <scope>LongestSubstring</scope>
         </dependency>
         <dependency>
             <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-test</artifactId>
-            <scope>test</scope>
+            <artifactId>reactor-LongestSubstring</artifactId>
+            <scope>LongestSubstring</scope>
         </dependency>
     </dependencies>
 
