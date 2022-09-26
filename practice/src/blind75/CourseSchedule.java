@@ -91,29 +91,26 @@ public class CourseSchedule {
            System.out.println(Arrays.toString(findTopologicalSort(4, testCase)));
        }
         static int[] findTopologicalSort(int numCourses, int[][] prerequisites) {
-
            Map<Integer, List<Integer>> map = new HashMap<>();
            int[] degree = new int[numCourses];
            int[] topologicalOrder = new int[numCourses];
-           Queue<Integer> queue = new LinkedList<>();
 
-           for (int i = 0; i < prerequisites.length; i++) {
+           for(int i = 0; i < prerequisites.length; i++) {
                int destination = prerequisites[i][0];
-               int source = prerequisites[i][1];
-               List<Integer> lst = map.getOrDefault(source, new ArrayList<>());
+               int src = prerequisites[i][1];
+
+               List<Integer> lst = map.getOrDefault(src, new ArrayList<>());
                lst.add(destination);
-
-               map.put(source, lst);
-
+               map.put(src, lst);
                degree[destination] += 1;
            }
 
+           Queue<Integer> queue = new LinkedList<>();
            for (int i = 0; i < numCourses; i++) {
                if (degree[i] == 0) {
                    queue.add(i);
                }
            }
-
            int i = 0;
            while(!queue.isEmpty()) {
                int node = queue.remove();
@@ -130,7 +127,7 @@ public class CourseSchedule {
                }
            }
 
-           if (i == numCourses) {
+           if ( i == numCourses) {
                return topologicalOrder;
            }
 

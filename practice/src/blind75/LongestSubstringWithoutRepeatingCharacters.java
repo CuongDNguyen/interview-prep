@@ -29,23 +29,23 @@ public class LongestSubstringWithoutRepeatingCharacters {
     }
 
     static String mimicGetLongestSubstring(String str) {
-        String longestSubstring = ""; //Initialize the returned string
         Map<Character, Integer> map = new HashMap<>();
-        for (int start = 0, end = 0; end < str.length(); end++) { //end pointer
-            Character currCharacter = str.charAt(end); //current character
 
-            if (map.containsKey(currCharacter)) { //check map to see if current character is duplicate
-                start = Math.max(map.get(currCharacter) + 1, start); // set start of substring to either the starting pointer or previous substring length
+        String longestSubstring = "";
+
+        for (int start = 0, end = 0; end < str.length(); end++) {
+            Character currCharacter = str.charAt(end);
+
+            if (map.containsKey(currCharacter)) {
+                start = Math.max(map.get(currCharacter) + 1, start);
             }
 
-            if (longestSubstring.length() < end - start + 1) { //if length of substring is less than end - start + 1
+            if (longestSubstring.length() < end - start + 1) {
                 longestSubstring = str.substring(start, end + 1);
             }
 
             map.put(currCharacter, end);
         }
-
-
         return longestSubstring;
     }
 }

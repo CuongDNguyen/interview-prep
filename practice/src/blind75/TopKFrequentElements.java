@@ -16,6 +16,7 @@ public class TopKFrequentElements {
     public static void main(String[] args) {
         int[] testCase = {1,1,1,2,2,3,3,3,3,3,3,3,3,4,4,4,4,4};
         System.out.println(Arrays.toString(getTopKFrequentElements(testCase, 2)));
+        System.out.println(Arrays.toString(test(testCase, 2)));
     }
 
     /*
@@ -44,5 +45,26 @@ public class TopKFrequentElements {
         }
 
         return lst.stream().mapToInt(i -> i).toArray();
+    }
+
+    static int[] test(int[] arrays, int k) {
+        List<Integer> result = new ArrayList<>();
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int num : arrays) {
+            map.put(num, map.getOrDefault(num, 0) + 1);
+        }
+
+        PriorityQueue<Map.Entry<Integer, Integer>> pqueue = new PriorityQueue<>( (a,b) -> a.getKey() == b.getKey() ?
+                Integer.compare(b.getKey(), a.getKey()) : Integer.compare(b.getValue(), a.getValue()));
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            pqueue.add(entry);
+        }
+
+        for (int i = 0; i < k; i++) {
+            result.add(pqueue.poll().getKey());
+        }
+
+        return result.stream().mapToInt(i -> i).toArray();
     }
 }

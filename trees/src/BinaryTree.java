@@ -59,6 +59,15 @@ public class BinaryTree {
             }
         }
     }
+
+    static void DFSRecursive(Node root) {
+        if (root == null) return;
+
+        DFSRecursive(root.left);
+
+        DFSRecursive(root.right);
+        System.out.println(root.val);
+    }
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
         tree.root = new Node(1);
@@ -72,6 +81,9 @@ public class BinaryTree {
 
         System.out.println("DFS....");
         DFS(tree.root);
+
+        System.out.println("###DFS Recursive###");
+        DFSRecursive(tree.root);
     }
 }
 
