@@ -39,69 +39,18 @@ public class CourseSchedule {
     }
    static class BFSLeetCodeOfficialSolution {
        static int[] findOrder(int numCourses, int[][] prerequisites) {
-           Map<Integer, List<Integer>> adjList = new HashMap<>();
-           int[] indegree = new int[numCourses];
-           int[] topologicalOrder = new int[numCourses];
-
-           for (int i = 0; i < prerequisites.length; i++) {
-               int dest = prerequisites[i][0]; //[1,0] -> 1, must take
-               int src = prerequisites[i][1]; //[1,0] --> 0, required
-               List<Integer> lst = adjList.getOrDefault(src, new ArrayList<>());
-               lst.add(dest); // [1]
-               adjList.put(src, lst); // (0, [1])
-
-               indegree[dest] += 1; //
-           }
-
-           Queue<Integer> queue = new LinkedList<>();
-           for (int i = 0; i < numCourses; i++) {
-               if (indegree[i] == 0) {
-                   queue.add(i);
-               }
-           }
-
-           int i = 0;
-           while(!queue.isEmpty()) {
-               int node = queue.remove();
-               topologicalOrder[i++] = node;
-
-               if (adjList.containsKey(node)) {
-                   for (Integer neighbor : adjList.get(node)) {
-                       indegree[neighbor]--;
-
-                       if (indegree[neighbor] == 0) {
-                           queue.add(neighbor);
-                       }
-                   }
-
-               }
-           }
-
-           if (i == numCourses) {
-               return topologicalOrder;
-           }
-           return new int[0];
-
-       }
-   }
-
-   static class mySolution {
-       public static void main(String[] args) {
-           int[][] testCase = {{1,0},{2,0},{3,1},{3,2}};
-           System.out.println(Arrays.toString(findTopologicalSort(4, testCase)));
-       }
-        static int[] findTopologicalSort(int numCourses, int[][] prerequisites) {
-           Map<Integer, List<Integer>> map = new HashMap<>();
+           Map<Integer, List<Integer>> checkedMap = new HashMap<>();
            int[] degree = new int[numCourses];
-           int[] topologicalOrder = new int[numCourses];
+           int[] schedule = new int[numCourses];
 
            for(int i = 0; i < prerequisites.length; i++) {
                int destination = prerequisites[i][0];
                int src = prerequisites[i][1];
 
-               List<Integer> lst = map.getOrDefault(src, new ArrayList<>());
+               List<Integer> lst = checkedMap.getOrDefault(src, new ArrayList<>());
                lst.add(destination);
-               map.put(src, lst);
+
+               checkedMap.put(src, lst);
                degree[destination] += 1;
            }
 
@@ -111,13 +60,14 @@ public class CourseSchedule {
                    queue.add(i);
                }
            }
+
            int i = 0;
            while(!queue.isEmpty()) {
-               int node = queue.remove();
-               topologicalOrder[i++] = node;
+               int current = queue.poll();
+               schedule[i++] = current;
 
-               if (map.containsKey(node)) {
-                   for (Integer neighbor : map.get(node)) {
+               if(checkedMap.containsKey(current)) {
+                   for (Integer neighbor : checkedMap.get(current)) {
                        degree[neighbor]--;
 
                        if (degree[neighbor] == 0) {
@@ -127,11 +77,62 @@ public class CourseSchedule {
                }
            }
 
-           if ( i == numCourses) {
-               return topologicalOrder;
-           }
-
+           if (i == numCourses) return schedule;
            return new int[0];
-        }
+       }
+   }
+
+   static class mySolution {
+       public static void main(String[] args) {
+           int[][] testCase = {{1, 0}, {2, 0}, {3, 1}, {3, 2}};
+           System.out.println(findTopologicalSort(4, testCase));
+       }
+
+       static boolean findTopologicalSort(int numCourses, int[][] prerequisites) {
+           {
+               //topological sort
+               //graph with prerequiites as the edges
+               Map<Integer, List<Integer>> map = new HashMap<>();
+
+               int[] degree = new int[numCourses];
+               int[] schedule = new int[numCourses];
+
+               for (int i = 0; i < prerequisites.length; i++) {
+                   int destination = prerequisites[i][0];
+                   int src = prerequisites[i][1];
+
+                   List<Integer> list = map.getOrDefault(src, new ArrayList<>());
+                   list.add(destination);
+
+                   degree[destination] += 1;
+                   map.put(src, list);
+               }
+
+               int courses = 0;
+               Queue<Integer> queue = new LinkedList<>();
+               for (int i = 0; i < numCourses; i++) {
+                   if (degree[i] == 0) {
+                       queue.add(i);
+                   }
+               }
+
+               while (!queue.isEmpty()) {
+                   int current = queue.poll();
+                   schedule[courses++] = current;
+                   if (map.containsKey(current)) {
+                       for (Integer neighbor : map.get(current)) {
+                           degree[neighbor]--;
+
+                           if (degree[neighbor] == 0) {
+                               queue.add(neighbor);
+                           }
+                       }
+                   }
+               }
+
+               if (courses == numCourses) return true;
+               return false;
+           }
+       }
    }
 }

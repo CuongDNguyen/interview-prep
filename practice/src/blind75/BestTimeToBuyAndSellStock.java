@@ -1,8 +1,6 @@
 package blind75;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /*
 You are given an array prices where prices[i] is the price
@@ -28,6 +26,7 @@ public class BestTimeToBuyAndSellStock {
     public static void main(String[] args) {
         int[] prices = new int[]{7, 1, 5, 3, 6, 4};
         System.out.println(bestStock(prices));
+        Set<Integer> set = new HashSet<>();
     }
 
     static int bestStock(int[] prices) {
