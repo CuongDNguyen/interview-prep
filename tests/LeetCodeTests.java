@@ -342,6 +342,18 @@ public class LeetCodeTests {
         int pointer2 = 0;
         while(pointer1 < slots1.length && pointer2 < slots2.length) {
             int intersectLeft = Math.max(slots1[pointer1][0], slots2[pointer2][0]);
+            int intersectRight = Math.min(slots1[pointer1][1], slots2[pointer2][1]);
+
+            if (intersectRight - intersectLeft >= duration) {
+                return new ArrayList<>(Arrays.asList(intersectLeft, intersectLeft + duration));
+            }
+
+            if (slots1[pointer1][1] < slots2[pointer2][1]) {
+                pointer1++;
+            } else {
+                pointer2++;
+            }
         }
+        return new ArrayList<>();
     }
 }
