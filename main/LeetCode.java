@@ -4,6 +4,7 @@ public class LeetCode {
     public static void main(String[] args) {
         CapitalOneProblems cp = new CapitalOneProblems();
         System.out.println(cp.countPrimes(10));
+        System.out.println();
     }
 
     static class ListNode {
